@@ -18,5 +18,9 @@ class Vereadores extends Model
         'numero_de_urna',
         'quantidade_de_votos'
     ];
-    
+    public function documentos(){
+        return $this->belongsToMany(Documentos::class,'documentos_vereadores','id_vereadores','id_documentos');
+    }
+
+   
 }

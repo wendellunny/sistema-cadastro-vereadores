@@ -72,7 +72,9 @@ class ReunioesController extends Controller
      */
     public function show($id)
     {
-        //
+        $dataModel = Reunioes::find($id);
+        $dataModel->documentos;
+        return response()->json(["Reuniao"=>$dataModel],200,['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],JSON_UNESCAPED_UNICODE);
     }
 
     /**

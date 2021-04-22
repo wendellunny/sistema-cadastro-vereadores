@@ -36,15 +36,14 @@ class ArquivosController extends Controller
 
     public function index()
     {
-       
+        $dataModel = Arquivos::all();
+        return response()->json(['arquivos_enviados'=>$dataModel],200,['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],JSON_UNESCAPED_UNICODE);      
     }
     public function show($id)
     {
-        //
+        $dataModel = Arquivos::find($id);
+        return response()->json(['arquivo'=>$dataModel],200,['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],JSON_UNESCAPED_UNICODE); 
     }
 
-    public function destroy($id)
-    {
-        //
-    }
+   
 }

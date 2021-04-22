@@ -47,7 +47,9 @@ class VereadorController extends Controller
      */
     public function show($id)
     {
-        //
+        $dataModel = Vereadores::find($id);
+        $dataModel->documentos;
+        return response()->json(["Vereador"=>$dataModel],200,['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],JSON_UNESCAPED_UNICODE);
     }
 
     /**

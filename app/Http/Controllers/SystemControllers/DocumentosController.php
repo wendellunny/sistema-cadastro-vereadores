@@ -73,8 +73,16 @@ class DocumentosController extends Controller
      */
     public function show($id)
     {
-        //
+        $dataModel = Documentos::find($id);
+        $dataModel->vereadores;
+        $dataModel->reunioes;
+        $dataModel->arquivo_documento = Arquivos::find($dataModel->arquivo_documento);
+        return response()->json(["Documento"=>$dataModel],200,['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],JSON_UNESCAPED_UNICODE);
+
+       
     }
+    
+    
 
     /**
      * Update the specified resource in storage.
