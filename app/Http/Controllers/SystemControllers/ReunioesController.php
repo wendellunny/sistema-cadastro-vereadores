@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ReunioesRequest;
 use App\Models\Arquivos;
 use App\Models\Reunioes;
+use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ReunioesController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 
      *
      * @return \Illuminate\Http\Response
      */
@@ -29,7 +31,7 @@ class ReunioesController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -101,6 +103,13 @@ class ReunioesController extends Controller
     public function destroy($id)
     {
         $data = Reunioes::find($id);
+        
+        $arquivoPauta = Arquivos::find($data->arquivo_pauta)->caminho;
+        $arquivoPauta = str_replace("/storage","public",$arquivoPauta);
+        $arquivoAta = Arquivos::find($data->arquivo_ata)->caminho;
+        $arquivoAta = str_replace("/storage","public",$arquivoAta);
+        Storage::delete($arquivoPauta);
+        Storage::delete($arquivoAta);
         $data->delete();
         return response()->json(['msg'=>'Reunião deletada com sucesso','data'=>$data]);
     }

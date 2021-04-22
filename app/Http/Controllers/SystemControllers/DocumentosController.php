@@ -6,11 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Arquivos;
 use App\Models\Documentos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentosController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 
      *
      * @return \Illuminate\Http\Response
      */
@@ -27,7 +28,7 @@ class DocumentosController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -66,7 +67,7 @@ class DocumentosController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -85,7 +86,7 @@ class DocumentosController extends Controller
     
 
     /**
-     * Update the specified resource in storage.
+     * 
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -100,7 +101,7 @@ class DocumentosController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -108,11 +109,18 @@ class DocumentosController extends Controller
     public function destroy($id)
     {
         $data = Documentos::find($id);
+        $arquivoDocumento = Arquivos::find($data->arquivo_documento)->caminho;
+        $arquivoDocumento = str_replace("/storage","public",$arquivoDocumento);
+
+        Storage::delete($arquivoDocumento);
+     
         $data->delete();
         return response()->json(['msg'=>'Documento deletado com sucesso','data'=>$data]);
     }
 
-
+    /* 
+        Método que adiciona vereadores ao relacionamento n:m de documentos_vereadores
+    */
     public function addVereadores($idDocumento ,$data ){
 
         $documento = Documentos::find($idDocumento);
