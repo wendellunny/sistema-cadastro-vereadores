@@ -15,10 +15,10 @@ class CreateArquivosTable extends Migration
     {
         Schema::create('arquivos', function (Blueprint $table) {
             $table->id();
-            $table->string('nome',20);
+            $table->string('nome',255);
             $table->string('caminho',255);
             $table->string('extensao',6);
-            $table->float('tamanho',6,2);
+            $table->integer('tamanho');
             $table->timestamps();
         });
     }

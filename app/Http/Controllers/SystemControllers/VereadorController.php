@@ -19,7 +19,7 @@ class VereadorController extends Controller
     public function index()
     {
         $dataModel = Vereadores::all();
-        return response()->json(['vereadores_cadastrados'=>$dataModel]);
+        return response()->json(['vereadores_cadastrados'=>$dataModel],200,['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -57,9 +57,12 @@ class VereadorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(VereadorRequest $request, $id)
     {
-        //
+        $data = $request->all();
+        $dataModel = Vereadores::findOrFail($id);
+        $dataModel->update($data);
+        return response()->json(['msg' => 'Vereador Atualizado com Sucesso','data'=>$data]);
     }
 
     /**
@@ -70,6 +73,8 @@ class VereadorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Vereadores::find($id);
+        $data->delete();
+        return response()->json(['msg'=>'Vereador deletado com sucesso','data'=>$data]);
     }
 }

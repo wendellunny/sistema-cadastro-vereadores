@@ -16,6 +16,7 @@ class CreateReunioesTable extends Migration
         Schema::create('reunioes', function (Blueprint $table) {
             $table->id();
             $table->string('tipo',15);
+            $table->date('data_reuniao');
             $table->foreignId('arquivo_pauta');
             $table->foreignId('arquivo_ata');
             $table->foreign('arquivo_pauta')->references('id')->on('arquivos')->onDelete('cascade');

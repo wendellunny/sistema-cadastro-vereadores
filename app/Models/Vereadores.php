@@ -18,4 +18,5 @@ class Vereadores extends Model
         'numero_de_urna',
         'quantidade_de_votos'
     ];
+    
 }

@@ -11,6 +11,9 @@ class Reunioes extends Model
     protected $table = 'reunioes';
     protected $primarykey ='id';
     protected $fillable = [
-        'tipo'
+        'tipo',
+        'data_reuniao',
+        'arquivo_pauta',
+        'arquivo_ata'
     ];
 }

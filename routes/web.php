@@ -18,6 +18,4 @@ Route::get('/', function () {
   
 });
 
-Route::get('teste-email',function(){
-    return new registerSuccessful;
-});
+
